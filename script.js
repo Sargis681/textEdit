@@ -71,7 +71,6 @@ function copyTextToClipboard(text) {
   document.execCommand("copy");
   document.body.removeChild(tempTextArea);
 }
-
 function generateSelectedLiText() {
   a = inputOne.value;
   b = inputTwo.value;

@@ -1,15 +1,15 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
-    display: flex;
-    justify-content: center;
+    /* display: flex; */
+    /* justify-content: center; */
     /* align-items: center; */
     gap: 100px;
     max-width: 1140px;
     height: 100vh;
+    /* display: flex; */
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
   }
   .all{
       ul{
@@ -39,12 +39,19 @@ body {
       }
   }
   .textLoaders{
+    margin-top: 100px;
    display: flex;
    flex-direction: column;
    text-align: center;
-   align-items: center;
+   /* align-items: center; */
+  
   }
-
+.inputName{
+  display: flex;
+  align-items: center;
+  
+  justify-content: space-between;
+}
   .container {
     background-color: #fff;
     padding: 20px;
@@ -95,4 +102,9 @@ body {
     font-size: 18px;
     color: #333;
     word-wrap: break-word;
+  }
+  .parNAme{
+    width: 500px;
+    margin: 0 auto;
+    border: 1px solid black;
   }

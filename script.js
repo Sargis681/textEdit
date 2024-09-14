@@ -1,12 +1,13 @@
 let a = "";
 let b = "";
 let c = "";
-let selectedLiText = ""; 
-let selectedLiIndex = -1; 
+let selectedLiText = "";
+let selectedLiIndex = -1; // Ensure selectedLiIndex is initialized globally
 
 // Create and append headers
 const headers = document.createElement("div");
 document.body.appendChild(headers);
+
 headers.innerHTML = `
   <div class="all">
     <ul>
@@ -22,7 +23,7 @@ headers.innerHTML = `
 const listItems = document.querySelectorAll("li");
 listItems.forEach((li, i) => {
   li.addEventListener("click", () => {
-    selectedLiIndex = i;
+    selectedLiIndex = i; // Update selectedLiIndex when a list item is clicked
 
     listItems.forEach(el => el.classList.remove("clicked"));
     li.classList.add("clicked");
@@ -36,19 +37,33 @@ document.body.appendChild(container);
 
 container.innerHTML = `
   <div class="textLoaders">
-    <input class="inputOne" type="text" placeholder="Введите первое значение">
-    <input class="inputTwo" type="text" placeholder="Введите второе значение">
-    <input class="inputThree" type="text" placeholder="Введите третье значение">
+
+    <div class="inputName">
+      <span>Հանձնարարագրի համարը</span>
+      <input class="inputOne" type="text" placeholder="Введите первое значение">
+    </div>
+
+    <div class="inputName">
+      <span>Տուգանքի չափը</span>
+      <input class="inputTwo" type="text" placeholder="Введите второе значение">
+    </div>
+
+    <div class="inputName">
+      <span>Ստուգման տեսակը</span>
+      <input class="inputThree" type="text" placeholder="Введите третье значение">
+    </div>
+
     <button class="updateButton">Обновить текст и скопировать</button>
   </div>
-  <p class="paragraf"></p>
+  
+   <textarea class="textArea" rows="4" cols="50"></textarea>
 `;
 
 const inputOne = document.querySelector(".inputOne");
 const inputTwo = document.querySelector(".inputTwo");
 const inputThree = document.querySelector(".inputThree");
 const button = document.querySelector(".updateButton");
-const paragraf = document.querySelector(".paragraf");
+const textArea = document.querySelector(".textArea");
 
 function copyTextToClipboard(text) {
   const tempTextArea = document.createElement("textarea");
@@ -64,30 +79,39 @@ function generateSelectedLiText() {
   b = inputTwo.value;
   c = inputThree.value;
 
-  switch (selectedLiIndex) {
-    case 0:
-      selectedLiText = `Hdm ${a} ${b} ${c}`;
-      break;
-    case 1:
-      selectedLiText = `Chgrancvat ashxatox ${a} ${b} ${c}`;
-      break;
-    case 2:
-      selectedLiText = `Ankanxiki stugum ${a} ${b} ${c}`;
-      break;
-    case 3:
-      selectedLiText = `Gner chshtutyan stugum ${a} ${b} ${c}`;
-      break;
-    default:
-      selectedLiText = `barlus ${a} ${b} ${c}`;
+  if (selectedLiIndex === -1) {
+    // If no list item has been selected, show a warning or default text
+    selectedLiText = "Please select a list item first.";
+  } else {
+    switch (selectedLiIndex) {
+      case 0:
+        selectedLiText = `Hdm ${a} ${b} ${c}`;
+        break;
+      case 1:
+        selectedLiText = `Chgrancvat ashxatox ${a} ${b} ${c}`;
+        break;
+      case 2:
+        selectedLiText = `Ankanxiki stugum ${a} ${b} ${c}`;
+        break;
+      case 3:
+        selectedLiText = `Gner chshtutyan stugum ${a} ${b} ${c}`;
+        break;
+      default:
+        selectedLiText = `barlus ${a} ${b} ${c}`;
+    }
   }
 
-  // Update the paragraph text with selectedLiText
-  paragraf.textContent = selectedLiText;
+  // Update the textarea value with selectedLiText
+  textArea.value = selectedLiText;
 }
+
 function updateText() {
   generateSelectedLiText();
 
-  copyTextToClipboard(selectedLiText);
+  // Copy text to clipboard only if a valid list item was selected
+  if (selectedLiIndex !== -1) {
+    copyTextToClipboard(selectedLiText);
+  }
 }
 
 button.addEventListener("click", updateText);

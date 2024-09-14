@@ -2,9 +2,8 @@ let a = "";
 let b = "";
 let c = "";
 let selectedLiText = "";
-let selectedLiIndex = -1; // Ensure selectedLiIndex is initialized globally
+let selectedLiIndex = -1; 
 
-// Create and append headers
 const headers = document.createElement("div");
 document.body.appendChild(headers);
 
@@ -19,11 +18,10 @@ headers.innerHTML = `
   </div>
 `;
 
-// Add event listeners to list items
 const listItems = document.querySelectorAll("li");
 listItems.forEach((li, i) => {
   li.addEventListener("click", () => {
-    selectedLiIndex = i; // Update selectedLiIndex when a list item is clicked
+    selectedLiIndex = i; 
 
     listItems.forEach(el => el.classList.remove("clicked"));
     li.classList.add("clicked");
@@ -80,7 +78,6 @@ function generateSelectedLiText() {
   c = inputThree.value;
 
   if (selectedLiIndex === -1) {
-    // If no list item has been selected, show a warning or default text
     selectedLiText = "Please select a list item first.";
   } else {
     switch (selectedLiIndex) {
@@ -101,14 +98,12 @@ function generateSelectedLiText() {
     }
   }
 
-  // Update the textarea value with selectedLiText
   textArea.value = selectedLiText;
 }
 
 function updateText() {
   generateSelectedLiText();
 
-  // Copy text to clipboard only if a valid list item was selected
   if (selectedLiIndex !== -1) {
     copyTextToClipboard(selectedLiText);
   }
